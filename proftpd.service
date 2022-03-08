@@ -4,18 +4,18 @@ After=docker.service
 Requires=docker.service
 
 [Service]
-Environment="NAME=hauptmedia-proftpd"
+Environment="NAME=driesva-proftpd-latest"
 TimeoutStartSec=300
 ExecStartPre=-/usr/bin/docker kill ${NAME}
 ExecStartPre=-/usr/bin/docker rm -f ${NAME}
-ExecStartPre=/usr/bin/docker pull hauptmedia/proftpd
+ExecStartPre=/usr/bin/docker pull driesva/proftpd:latest
 ExecStart=/usr/bin/docker run \
 	--name ${NAME} \
 	-p 20:20 \
 	-p 21:21 \
 	-e FTP_USERNAME=test \
 	-e FTP_PASSWORD=test \
-	hauptmedia/proftpd
+	driesva/proftpd:latest
 ExecStop=/usr/bin/docker stop ${NAME}
 Restart=always
 
